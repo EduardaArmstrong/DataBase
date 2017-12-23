@@ -1,6 +1,8 @@
 package com.mvp.eduarda.studylist.data.prefs;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.mvp.eduarda.studylist.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylist.data.domain.Lista;
 import java.util.ArrayList;
@@ -11,36 +13,29 @@ import java.util.List;
  */
 
 public class Preferences {
-    private ListaDaoImpl listaDao;
-    private List<Lista> listaTodos = new ArrayList<Lista>();
-    private ArrayList<Lista> listaItem = new ArrayList<Lista>();
+    private SharedPreferences sharedPreferences;
+    private static final String ARQUIVO_FLAG = "arquivoFlag";
+    private String estado = "";
 
     public Preferences(Context context) {
-        listaDao = new ListaDaoImpl(context);
+        sharedPreferences = context.getSharedPreferences(ARQUIVO_FLAG, context.MODE_PRIVATE);
+    }
+
+    public void salvarFlag(String key, String valor){
+
+        sharedPreferences.edit()
+                .putString(key,valor)
+                .commit();
 
     }
 
-    public void Cadastrar( String descricao){
-        listaDao.salvarItemLista(descricao);
-    }
+    public boolean buscarFlag(String key){
+        estado = sharedPreferences.getString("flag","");
 
-    public void Excluir(int id){
-        listaDao.deletarItemLista(id);
-    }
-
-    public void Editar(int id , String descricao){
-        listaDao.editarItemLista(id,descricao);
-    }
-
-    public List<Lista> ListarTodos(){
-        listaTodos = listaDao.listarItens();
-
-        return listaTodos;
-    }
-
-    public ArrayList<Lista> BuscarItem(int id){
-        listaItem = listaDao.buscarItemLista(id);
-        return listaItem;
+        if(estado.isEmpty() || estado == null){
+            return false;
+        }
+        return  true;
     }
 
 }

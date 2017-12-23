@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mvp.eduarda.studylist.R;
@@ -16,7 +17,7 @@ import com.mvp.eduarda.studylist.app.StudyList;
 import com.mvp.eduarda.studylist.data.domain.Lista;
 import com.mvp.eduarda.studylist.ui.singup.SingUpActivity;
 import com.mvp.eduarda.studylist.ui.edit.EditActivity;
-import com.mvp.eduarda.studylist.ui.main.Adapter.ListItemAdapter;
+import com.mvp.eduarda.studylist.ui.main.adapter.ListItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
 
         mainPresenter = new MainPresenterImpl(this, StudyList.getInstance());
         mainPresenter.buscarLista();
+        mainPresenter.verificarFlag("flag");
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -124,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
             adapter.setNewData(listaresultado);
         }
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void toastBemVindo() {
+        Toast.makeText(MainActivity.this, " Bem Vindo ", Toast.LENGTH_SHORT).show();
     }
 
 }

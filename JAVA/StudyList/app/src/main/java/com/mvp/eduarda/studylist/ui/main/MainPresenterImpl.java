@@ -5,6 +5,8 @@ import android.content.Context;
 import com.mvp.eduarda.studylist.app.StudyList;
 import com.mvp.eduarda.studylist.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylist.data.domain.Lista;
+import com.mvp.eduarda.studylist.data.prefs.Preferences;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     private IMain.MainView mainView;
     private ListaDaoImpl listaDao;
     private List<Lista> resultado = new ArrayList<Lista>();
+    private boolean estadoFlag = true;
+    private Preferences preferences;
 
     public MainPresenterImpl(IMain.MainView mainView, Context context) {
         this.mainView = mainView;
@@ -33,5 +37,15 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     public void buscarLista() {
        resultado = listaDao.listarItens();
        mainView.updateLista(resultado);
+    }
+
+    @Override
+    public void verificarFlag(String key) {
+        estadoFlag = preferences.buscarFlag(key);
+
+        if(!estadoFlag){
+            preferences.salvarFlag("flag", "true");
+            mainView.toastBemVindo();
+        }
     }
 }

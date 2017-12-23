@@ -11,12 +11,14 @@ public interface IMain {
 
     interface MainView{
         void updateLista(List<Lista> listaResultado);
+        void toastBemVindo();
 
     }
 
     interface MainPresenter{
         void clickBotaoExcluir(int id);
         void buscarLista();
+        void verificarFlag(String key);
 
     }
 

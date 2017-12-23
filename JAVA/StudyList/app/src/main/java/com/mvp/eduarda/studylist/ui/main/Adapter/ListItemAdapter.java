@@ -1,4 +1,4 @@
-package com.mvp.eduarda.studylist.ui.main.Adapter;
+package com.mvp.eduarda.studylist.ui.main.adapter;
 
 
 import android.support.annotation.Nullable;
