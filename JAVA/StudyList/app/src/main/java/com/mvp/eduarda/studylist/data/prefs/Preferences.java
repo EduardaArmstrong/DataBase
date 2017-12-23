@@ -15,7 +15,7 @@ import java.util.List;
 public class Preferences {
     private SharedPreferences sharedPreferences;
     private static final String ARQUIVO_FLAG = "arquivoFlag";
-    private String estado = "";
+    private String estado;
 
     public Preferences(Context context) {
         sharedPreferences = context.getSharedPreferences(ARQUIVO_FLAG, context.MODE_PRIVATE);
@@ -30,12 +30,13 @@ public class Preferences {
     }
 
     public boolean buscarFlag(String key){
-        estado = sharedPreferences.getString("flag","");
+        estado = sharedPreferences.getString(key,"");
 
         if(estado.isEmpty() || estado == null){
             return false;
+        }else {
+            return true;
         }
-        return  true;
     }
 
 }

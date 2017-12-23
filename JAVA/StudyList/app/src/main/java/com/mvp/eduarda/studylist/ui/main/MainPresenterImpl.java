@@ -19,12 +19,13 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     private IMain.MainView mainView;
     private ListaDaoImpl listaDao;
     private List<Lista> resultado = new ArrayList<Lista>();
-    private boolean estadoFlag = true;
+    private boolean estadoFlag;
     private Preferences preferences;
 
     public MainPresenterImpl(IMain.MainView mainView, Context context) {
         this.mainView = mainView;
         this.listaDao = new ListaDaoImpl(context);
+        this.preferences = new Preferences(context);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     public void verificarFlag(String key) {
         estadoFlag = preferences.buscarFlag(key);
 
-        if(!estadoFlag){
+        if(estadoFlag == false){
             preferences.salvarFlag("flag", "true");
             mainView.toastBemVindo();
         }

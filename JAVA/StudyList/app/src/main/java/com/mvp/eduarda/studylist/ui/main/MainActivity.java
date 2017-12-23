@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         adapter = new ListItemAdapter(new ArrayList<Lista>());
 
         mainPresenter = new MainPresenterImpl(this, StudyList.getInstance());
-        mainPresenter.buscarLista();
         mainPresenter.verificarFlag("flag");
+        mainPresenter.buscarLista();
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
 
     @Override
     public void toastBemVindo() {
-        Toast.makeText(MainActivity.this, " Bem Vindo ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, " Bem Vindo ", Toast.LENGTH_LONG).show();
     }
 
 }
