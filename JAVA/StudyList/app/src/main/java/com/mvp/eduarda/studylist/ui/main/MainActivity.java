@@ -45,14 +45,6 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         mainPresenter = new MainPresenterImpl(this, StudyList.getInstance().getPreferences());
         mainPresenter.buscarLista();
 
-        //botao +
-        btCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this , CadastrarActivity.class));
-            }
-        });
-
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                         dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+
                             }
                         });
 
@@ -101,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mainPresenter.clickBotaoExcluir(idItem);
-                                finish();
+
                             }
                         });
 
@@ -109,6 +101,14 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                         dialog.show();
                     break;
                 }
+            }
+        });
+
+        //botao +
+        btCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this , CadastrarActivity.class));
             }
         });
     }

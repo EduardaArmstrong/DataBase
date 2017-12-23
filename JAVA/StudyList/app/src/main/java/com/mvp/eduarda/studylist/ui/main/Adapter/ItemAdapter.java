@@ -25,6 +25,8 @@ public class ItemAdapter extends BaseQuickAdapter<Lista, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, Lista item) {
         helper.setText(R.id.id, String.valueOf(item.getId()));
         helper.setText(R.id.descricao, item.getItem());
+        helper.addOnClickListener(R.id.deletar);
+        helper.addOnClickListener(R.id.editar);
 
 
     }
