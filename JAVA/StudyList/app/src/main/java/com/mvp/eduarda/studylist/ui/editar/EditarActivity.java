@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,10 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar);
 
+        //Mostra flecha voltar na action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Titulo
         setTitle("Editar Conteudo da Lista");
 
         //recupera o id
@@ -39,11 +44,10 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
         editarPresenter = new EditarPresenterImpl(this, StudyList.getInstance().getPreferences());
         editarPresenter.buscarItem(idReduperado);
 
-        textoConteudoEditar = conteudoEditar.getText().toString();
-
         btSalvarEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textoConteudoEditar = conteudoEditar.getText().toString();
 
                 if(textoConteudoEditar.isEmpty()){
                     Toast.makeText(EditarActivity.this,"Digite o conteudo a ser alterado", Toast.LENGTH_SHORT).show();
@@ -75,6 +79,7 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
 
                     //botao sim
                     dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             editarPresenter.clickBotaoSalvarAlteracao(idReduperado,textoConteudoEditar);
@@ -97,5 +102,17 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
             materia = listaResultado.get(i).getItem();
         }
         conteudoEditar.setText(materia);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return  false;
     }
 }
