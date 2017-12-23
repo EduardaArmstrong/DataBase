@@ -11,9 +11,6 @@ public class Lista implements Serializable {
     private int id;
     private String item;
 
-    public Lista() {
-    }
-
     public Lista(int id, String item) {
         this.id = id;
         this.item = item;

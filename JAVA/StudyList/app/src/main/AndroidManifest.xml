@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.cadastrar.CadastrarActivity" />
-        <activity android:name=".ui.editar.EditarActivity"></activity>
+        <activity android:name=".ui.singup.SingUpActivity" />
+        <activity android:name=".ui.edit.EditActivity"></activity>
     </application>
 
 </manifest>

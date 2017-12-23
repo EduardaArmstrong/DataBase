@@ -1,4 +1,4 @@
-package com.mvp.eduarda.studylist.ui.cadastrar;
+package com.mvp.eduarda.studylist.ui.singup;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,35 +9,32 @@ import android.widget.Toast;
 
 import com.mvp.eduarda.studylist.R;
 import com.mvp.eduarda.studylist.app.StudyList;
-import com.mvp.eduarda.studylist.data.domain.Lista;
 
-import java.util.ArrayList;
-
-public class CadastrarActivity extends AppCompatActivity {
+public class SingUpActivity extends AppCompatActivity {
 
     private EditText descricao;
     private Button btSalvarCadastro;
-    private CadastrarPresenterImpl cadastrarPresenter;
+    private SingUpPresenterImpl cadastrarPresenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar);
+        setContentView(R.layout.activity_sing_up);
 
         setTitle("Cadastrar novo conteudo");
 
         descricao = (EditText) findViewById(R.id.conteudoId);
         btSalvarCadastro = (Button) findViewById(R.id.btSalvarCadastroId);
 
-        cadastrarPresenter = new CadastrarPresenterImpl(StudyList.getInstance().getPreferences());
+        cadastrarPresenter = new SingUpPresenterImpl(StudyList.getInstance());
 
         btSalvarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String textoDescricao = descricao.getText().toString();
                 if(textoDescricao.isEmpty()){
-                    Toast.makeText(CadastrarActivity.this, "Digite um conteudo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SingUpActivity.this, "Digite um conteudo", Toast.LENGTH_SHORT).show();
                 }else{
                     cadastrarPresenter.clickBotaoSalvar(textoDescricao);
                     finish();

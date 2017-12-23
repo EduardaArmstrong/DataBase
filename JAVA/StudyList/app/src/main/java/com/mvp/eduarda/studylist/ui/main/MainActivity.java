@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,10 +14,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mvp.eduarda.studylist.R;
 import com.mvp.eduarda.studylist.app.StudyList;
 import com.mvp.eduarda.studylist.data.domain.Lista;
-import com.mvp.eduarda.studylist.ui.cadastrar.CadastrarActivity;
-import com.mvp.eduarda.studylist.ui.cadastrar.ICadastrar;
-import com.mvp.eduarda.studylist.ui.editar.EditarActivity;
-import com.mvp.eduarda.studylist.ui.main.Adapter.ItemAdapter;
+import com.mvp.eduarda.studylist.ui.singup.SingUpActivity;
+import com.mvp.eduarda.studylist.ui.edit.EditActivity;
+import com.mvp.eduarda.studylist.ui.main.Adapter.ListItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
     RecyclerView  recyclerView;
     private ImageButton btCadastrar;
     private MainPresenterImpl mainPresenter;
-    private ItemAdapter adapter;
+    private ListItemAdapter adapter;
     private AlertDialog.Builder dialog;
 
     @Override
@@ -42,9 +39,9 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
 
         //recuperar componentes
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ItemAdapter(new ArrayList<Lista>());
+        adapter = new ListItemAdapter(new ArrayList<Lista>());
 
-        mainPresenter = new MainPresenterImpl(this, StudyList.getInstance().getPreferences());
+        mainPresenter = new MainPresenterImpl(this, StudyList.getInstance());
         mainPresenter.buscarLista();
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                     case R.id.editar:
 
                         Lista itemLista = (Lista) adapter.getData().get(position);
-                        Intent intent = new Intent(MainActivity.this, EditarActivity.class);
+                        Intent intent = new Intent(MainActivity.this, EditActivity.class);
                         intent.putExtra("id", itemLista.getId());
                         startActivity(intent);
                     break;
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this , CadastrarActivity.class));
+                startActivity(new Intent(MainActivity.this , SingUpActivity.class));
             }
         });
     }

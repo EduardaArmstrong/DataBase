@@ -1,8 +1,10 @@
 package com.mvp.eduarda.studylist.ui.main;
 
+import android.content.Context;
+
+import com.mvp.eduarda.studylist.app.StudyList;
+import com.mvp.eduarda.studylist.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylist.data.domain.Lista;
-import com.mvp.eduarda.studylist.data.model.DBModel;
-import com.mvp.eduarda.studylist.data.prefs.Preferences;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +15,23 @@ import java.util.List;
 public class MainPresenterImpl implements IMain.MainPresenter {
 
     private IMain.MainView mainView;
-    private DBModel dbModel;
+    private ListaDaoImpl listaDao;
     private List<Lista> resultado = new ArrayList<Lista>();
 
-    public MainPresenterImpl(IMain.MainView mainView, Preferences preferences ) {
+    public MainPresenterImpl(IMain.MainView mainView, Context context) {
         this.mainView = mainView;
-        this.dbModel = new DBModel(preferences);
+        this.listaDao = new ListaDaoImpl(context);
     }
 
     @Override
     public void clickBotaoExcluir(int id) {
-        dbModel.Excluir(id);
+        listaDao.deletarItemLista(id);
 
     }
 
     @Override
     public void buscarLista() {
-       resultado = dbModel.ListarTodos();
+       resultado = listaDao.listarItens();
        mainView.updateLista(resultado);
     }
 }

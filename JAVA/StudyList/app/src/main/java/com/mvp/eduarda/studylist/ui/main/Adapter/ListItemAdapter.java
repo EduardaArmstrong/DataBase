@@ -15,9 +15,9 @@ import java.util.List;
  * Created by Eduarda on 22/12/2017.
  */
 
-public class ItemAdapter extends BaseQuickAdapter<Lista, BaseViewHolder> {
+public class ListItemAdapter extends BaseQuickAdapter<Lista, BaseViewHolder> {
 
-    public ItemAdapter(@Nullable List<Lista> data) {
+    public ListItemAdapter(@Nullable List<Lista> data) {
         super(R.layout.recycler_item, data);
     }
 

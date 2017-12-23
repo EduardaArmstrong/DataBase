@@ -1,4 +1,4 @@
-package com.mvp.eduarda.studylist.ui.editar;
+package com.mvp.eduarda.studylist.ui.edit;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -16,18 +16,18 @@ import com.mvp.eduarda.studylist.data.domain.Lista;
 
 import java.util.ArrayList;
 
-public class EditarActivity extends AppCompatActivity implements IEditar.EditarView{
+public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     private EditText conteudoEditar;
     private Button btSalvarEditar;
     private int idReduperado;
-    private EditarPresenterImpl editarPresenter;
+    private EditPresenterImpl editarPresenter;
     private String textoConteudoEditar ="";
     private AlertDialog.Builder dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar);
+        setContentView(R.layout.activity_edit);
 
         //Mostra flecha voltar na action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,7 +41,7 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
         conteudoEditar = (EditText) findViewById(R.id.conteudoEditarId);
         btSalvarEditar = (Button) findViewById(R.id.btSalvarEdicaoId);
 
-        editarPresenter = new EditarPresenterImpl(this, StudyList.getInstance().getPreferences());
+        editarPresenter = new EditPresenterImpl(this, StudyList.getInstance());
         editarPresenter.buscarItem(idReduperado);
 
         btSalvarEditar.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +50,11 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
                 textoConteudoEditar = conteudoEditar.getText().toString();
 
                 if(textoConteudoEditar.isEmpty()){
-                    Toast.makeText(EditarActivity.this,"Digite o conteudo a ser alterado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this,"Digite o conteudo a ser alterado", Toast.LENGTH_SHORT).show();
                 }else{
 
                     //criar o alert dialog
-                    dialog = new AlertDialog.Builder(EditarActivity.this);
+                    dialog = new AlertDialog.Builder(EditActivity.this);
 
                     //configurar o título
                     dialog.setTitle("Editar Conteudo");
