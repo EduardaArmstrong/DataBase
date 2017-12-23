@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mainPresenter.clickBotaoExcluir(idItem);
-
+                                onResume();
                             }
                         });
 
@@ -111,6 +111,12 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                 startActivity(new Intent(MainActivity.this , CadastrarActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainPresenter.buscarLista();
     }
 
     @Override

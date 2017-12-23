@@ -20,7 +20,7 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
     private Button btSalvarEditar;
     private int idReduperado;
     private EditarPresenterImpl editarPresenter;
-    private String textoConteudoEditar;
+    private String textoConteudoEditar ="";
     private AlertDialog.Builder dialog;
 
     @Override
@@ -69,7 +69,7 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
                     dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
+
                         }
                     });
 
@@ -79,7 +79,6 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
                         public void onClick(DialogInterface dialogInterface, int i) {
                             editarPresenter.clickBotaoSalvarAlteracao(idReduperado,textoConteudoEditar);
                             finish();
-
                         }
                     });
 
@@ -87,7 +86,6 @@ public class EditarActivity extends AppCompatActivity implements IEditar.EditarV
                     dialog.show();
 
                 }
-
             }
         });
     }

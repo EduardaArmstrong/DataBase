@@ -31,8 +31,7 @@ public class DBModel implements IDBModel {
     }
 
     @Override
-    public void Editar(int id , String descricao)
-    {
+    public void Editar(int id , String descricao) {
         preferences.Editar(id, descricao);
     }
 
