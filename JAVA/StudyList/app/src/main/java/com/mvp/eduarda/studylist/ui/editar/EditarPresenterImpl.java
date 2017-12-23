@@ -3,9 +3,8 @@ package com.mvp.eduarda.studylist.ui.editar;
 import com.mvp.eduarda.studylist.data.domain.Lista;
 import com.mvp.eduarda.studylist.data.model.DBModel;
 import com.mvp.eduarda.studylist.data.prefs.Preferences;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by Eduarda on 22/12/2017.
