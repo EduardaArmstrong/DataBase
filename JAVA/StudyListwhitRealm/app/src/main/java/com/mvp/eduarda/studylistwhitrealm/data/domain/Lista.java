@@ -13,6 +13,9 @@ public class Lista extends RealmObject {
     private int id;
     private String detalhes;
 
+    public Lista() {
+    }
+
     public Lista(int id, String detalhes) {
         this.id = id;
         this.detalhes = detalhes;

@@ -29,7 +29,7 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     }
 
     @Override
-    public void clickBotaoExcluir(int id) {
+    public void excluirItem(int id) {
         listaDao.deletarItemLista(id);
 
     }

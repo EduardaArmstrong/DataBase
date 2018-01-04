@@ -16,7 +16,7 @@ public interface IMain {
     }
 
     interface MainPresenter{
-        void clickBotaoExcluir(int id);
+        void excluirItem(int id);
         void buscarLista();
         void verificarFlag(String key);
 

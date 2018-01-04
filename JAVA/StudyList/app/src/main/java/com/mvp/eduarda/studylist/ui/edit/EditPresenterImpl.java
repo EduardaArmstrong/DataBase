@@ -27,7 +27,7 @@ public class EditPresenterImpl implements IEdit.EditarPresenter {
     }
 
     @Override
-    public void clickBotaoSalvarAlteracao(int id, String descricao) {
+    public void salvarAlteracao(int id, String descricao) {
         listaDao.editarItemLista(id,descricao);
 
     }

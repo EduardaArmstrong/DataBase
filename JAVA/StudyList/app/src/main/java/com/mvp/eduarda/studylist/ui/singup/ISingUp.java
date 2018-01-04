@@ -8,7 +8,7 @@ public interface ISingUp {
 
     interface CadastrarPresenter{
 
-        void clickBotaoSalvar(String descricao);
+        void salvarItem(String descricao);
     }
 
 }

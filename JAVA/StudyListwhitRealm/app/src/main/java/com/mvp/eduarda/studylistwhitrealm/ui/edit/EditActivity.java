@@ -12,4 +12,9 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                         dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mainPresenter.clickBotaoExcluir(idItem);
+                                mainPresenter.excluirItem(idItem);
                                 onResume();
                             }
                         });

@@ -12,4 +12,9 @@ public class SingUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

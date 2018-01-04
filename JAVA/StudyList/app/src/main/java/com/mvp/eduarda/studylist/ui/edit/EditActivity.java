@@ -82,7 +82,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            editarPresenter.clickBotaoSalvarAlteracao(idReduperado,textoConteudoEditar);
+                            editarPresenter.salvarAlteracao(idReduperado,textoConteudoEditar);
                             finish();
                         }
                     });

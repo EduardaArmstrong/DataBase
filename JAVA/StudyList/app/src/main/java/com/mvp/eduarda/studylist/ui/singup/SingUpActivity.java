@@ -36,7 +36,7 @@ public class SingUpActivity extends AppCompatActivity {
                 if(textoDescricao.isEmpty()){
                     Toast.makeText(SingUpActivity.this, "Digite um conteudo", Toast.LENGTH_SHORT).show();
                 }else{
-                    cadastrarPresenter.clickBotaoSalvar(textoDescricao);
+                    cadastrarPresenter.salvarItem(textoDescricao);
                     finish();
                 }
             }
