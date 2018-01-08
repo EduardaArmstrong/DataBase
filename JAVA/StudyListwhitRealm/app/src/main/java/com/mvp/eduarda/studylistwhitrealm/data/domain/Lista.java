@@ -1,5 +1,6 @@
 package com.mvp.eduarda.studylistwhitrealm.data.domain;
 
+import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -10,22 +11,22 @@ import io.realm.annotations.PrimaryKey;
 public class Lista extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private long id;
     private String detalhes;
 
     public Lista() {
     }
 
-    public Lista(int id, String detalhes) {
+    public Lista(long id, String detalhes) {
         this.id = id;
         this.detalhes = detalhes;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -36,4 +37,17 @@ public class Lista extends RealmObject {
     public void setDetalhes(String detalhes) {
         this.detalhes = detalhes;
     }
+
+
+    public static Long autoIncrementId(){
+        Long key = 1L;
+        Realm realm = Realm.getDefaultInstance();
+        try {
+            key = realm.where(Lista.class).max("id").longValue() + 1;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return key;
+    }
+
 }
