@@ -40,14 +40,14 @@ public class Lista extends RealmObject {
 
 
     public static Long autoIncrementId(){
-        Long key = 1L;
+        Long id = 1L;
         Realm realm = Realm.getDefaultInstance();
         try {
-            key = realm.where(Lista.class).max("id").longValue() + 1;
+            id = realm.where(Lista.class).max("id").longValue() + 1;
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return key;
+        return id;
     }
 
 }
