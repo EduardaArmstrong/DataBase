@@ -11,11 +11,11 @@ import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static io.realm.Realm.init;
 
 public class MainActivity extends AppCompatActivity implements IMain.MainView{
-    private Realm realm;
     private MainPresenterImpl mainPresenter;
 
     @Override
@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainPresenter = new MainPresenterImpl(this , StudyListwhitRealm.getInstance());
+        mainPresenter = new MainPresenterImpl(this , StudyListwhitRealm.getInstance(), Realm.getDefaultInstance());
         mainPresenter.verificarFlag("flag");
 
     }
 
     @Override
-    public void updateLista(List<Lista> listaResultado) {
+    public void updateLista(RealmResults<Lista> listaResultado) {
         
     }
 

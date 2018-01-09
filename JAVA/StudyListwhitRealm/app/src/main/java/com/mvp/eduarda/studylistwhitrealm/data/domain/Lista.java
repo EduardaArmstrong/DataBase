@@ -1,8 +1,10 @@
 package com.mvp.eduarda.studylistwhitrealm.data.domain;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by Eduarda on 26/12/2017.
@@ -10,6 +12,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class Lista extends RealmObject {
 
+    @Required
     @PrimaryKey
     private long id;
     private String detalhes;
