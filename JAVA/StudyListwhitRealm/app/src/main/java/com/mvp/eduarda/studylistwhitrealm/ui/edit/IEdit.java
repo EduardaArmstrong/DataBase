@@ -16,6 +16,6 @@ public interface IEdit {
 
     interface  EditarPresenter{
         void buscarItem(int id);
-        void clickBotaoSalvarAlteracao(int id , String descricao);
+        void salvarAlteracao(int id , String descricao);
     }
 }

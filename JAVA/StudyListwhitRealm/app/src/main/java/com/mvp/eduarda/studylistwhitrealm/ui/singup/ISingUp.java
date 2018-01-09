@@ -7,7 +7,7 @@ package com.mvp.eduarda.studylistwhitrealm.ui.singup;
 public interface ISingUp {
     interface CadastrarPresenter{
 
-        void clickBotaoSalvar(String descricao);
+        void salvarItem(String descricao);
     }
 
 }

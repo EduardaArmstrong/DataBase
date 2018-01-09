@@ -6,7 +6,7 @@ package com.mvp.eduarda.studylistwhitrealm.ui.singup;
 
 public class SingUpPresenterImpl implements ISingUp.CadastrarPresenter {
     @Override
-    public void clickBotaoSalvar(String descricao) {
+    public void salvarItem(String descricao) {
 
     }
 }
