@@ -2,12 +2,12 @@ package com.mvp.eduarda.studylistwhitrealm.ui.main;
 
 import android.content.Context;
 
-import com.mvp.eduarda.studylistwhitrealm.data.db.DBHelper;
+import com.mvp.eduarda.studylistwhitrealm.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 import com.mvp.eduarda.studylistwhitrealm.data.prefs.Preferences;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Eduarda on 26/12/2017.
@@ -15,28 +15,27 @@ import io.realm.RealmResults;
 
 public class MainPresenterImpl implements IMain.MainPresenter{
     private IMain.MainView mainView;
-    private DBHelper dbHelper;
+    private ListaDaoImpl listaDao;
+    private List<Lista> resultado = new ArrayList<Lista>();
     private boolean estadoFlag;
     private Preferences preferences;
-    private RealmResults<Lista> resultado;
 
-    public MainPresenterImpl(IMain.MainView mainView , Context context , Realm realm) {
+    public MainPresenterImpl(IMain.MainView mainView, Context context) {
         this.mainView = mainView;
+        this.listaDao = new ListaDaoImpl(context);
         this.preferences = new Preferences(context);
-        this.dbHelper = new DBHelper(realm);
     }
 
     @Override
     public void excluirItem(int id) {
-        dbHelper.deletarItemLista(id);
+        listaDao.deletarItemLista(id);
 
     }
 
     @Override
     public void buscarLista() {
-        resultado = dbHelper.listarItens();
+        resultado = listaDao.listarItens();
         mainView.updateLista(resultado);
-
     }
 
     @Override
@@ -47,6 +46,5 @@ public class MainPresenterImpl implements IMain.MainPresenter{
             preferences.salvarFlag("flag", "true");
             mainView.toastBemVindo();
         }
-
     }
 }

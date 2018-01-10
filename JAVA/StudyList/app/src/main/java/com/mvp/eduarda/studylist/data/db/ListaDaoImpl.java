@@ -79,7 +79,7 @@ public class ListaDaoImpl extends MyDao {
         return getDatabase().update(DBHelper.Lista.TABELA, valores, "id = ?" , new String[]{String.valueOf(id)});
     }
 
-    public long deletarItemLista(int id ){
+        public long deletarItemLista(int id ){
 
        return  getDatabase().delete(DBHelper.Lista.TABELA, "id = ?", new String[]{String.valueOf(id)});
 

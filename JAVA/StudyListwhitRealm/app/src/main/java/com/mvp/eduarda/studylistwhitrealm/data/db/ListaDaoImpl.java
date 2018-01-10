@@ -1,27 +1,30 @@
 package com.mvp.eduarda.studylistwhitrealm.data.db;
 
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
-import io.realm.RealmResults;
+
 
 /**
  * Created by Eduarda on 27/12/2017.
  */
 
-public class DBHelper {
+public class ListaDaoImpl {
     private Realm realm;
 
-    public DBHelper(Realm realm) {
+    public ListaDaoImpl(Realm realm) {
         this.realm = realm;
-
     }
 
-    public RealmResults<Lista> listarItens() {
+    public List<Lista> listarItens() {
 
         return null;
     }
 
-    public RealmResults<Lista> buscarItemLista(int id) {
+    public ArrayList<Lista> buscarItemLista(int id) {
 
         return null;
     }

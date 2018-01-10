@@ -4,6 +4,8 @@ import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 
 import java.util.ArrayList;
 
+import io.realm.RealmResults;
+
 /**
  * Created by Eduarda on 26/12/2017.
  */

@@ -1,7 +1,6 @@
 package com.mvp.eduarda.studylistwhitrealm.data.domain;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -15,17 +14,17 @@ public class Lista extends RealmObject {
     @Required
     @PrimaryKey
     private long id;
-    private String detalhes;
+    private String item;
 
     public Lista() {
     }
 
-    public Lista(long id, String detalhes) {
+    public Lista(long id, String item) {
         this.id = id;
-        this.detalhes = detalhes;
+        this.item = item;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -33,12 +32,12 @@ public class Lista extends RealmObject {
         this.id = id;
     }
 
-    public String getDetalhes() {
-        return detalhes;
+    public String getItem() {
+        return item;
     }
 
-    public void setDetalhes(String detalhes) {
-        this.detalhes = detalhes;
+    public void setItem(String detalhes) {
+        this.item = item;
     }
 
 

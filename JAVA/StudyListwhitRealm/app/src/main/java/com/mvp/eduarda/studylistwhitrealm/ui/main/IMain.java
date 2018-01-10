@@ -13,7 +13,7 @@ import io.realm.RealmResults;
 public interface IMain {
 
     interface MainView{
-        void updateLista(RealmResults<Lista> listaResultado);
+        void updateLista(List<Lista> listaResultado);
         void toastBemVindo();
 
     }
