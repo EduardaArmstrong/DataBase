@@ -14,8 +14,8 @@ import io.realm.Realm;
 public class SingUpPresenterImpl implements ISingUp.CadastrarPresenter {
     private ListaDaoImpl listaDao;
 
-    public SingUpPresenterImpl(Realm realm) {
-        this.listaDao = new ListaDaoImpl(realm);
+    public SingUpPresenterImpl(ListaDaoImpl listaDaoImpl) {
+        this.listaDao = listaDaoImpl;
     }
 
     @Override

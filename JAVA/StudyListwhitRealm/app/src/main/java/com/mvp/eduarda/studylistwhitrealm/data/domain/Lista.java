@@ -11,7 +11,6 @@ import io.realm.annotations.Required;
 
 public class Lista extends RealmObject {
 
-    @Required
     @PrimaryKey
     private int id;
     private String item;

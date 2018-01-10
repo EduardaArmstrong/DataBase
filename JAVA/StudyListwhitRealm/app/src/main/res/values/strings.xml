@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">StudyList whit Realm</string>
+    <string name="item_descricao">Descrição</string>
+    <string name="item_id">Id</string>
     <string name="texto_estudar">Digite o conteudo a ser estudado</string>
     <string name="bt_salvar_cadastro">Salvar</string>
 </resources>

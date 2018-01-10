@@ -9,12 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
-
-import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -25,7 +23,6 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     private EditPresenterImpl editarPresenter;
     private String textoConteudoEditar ="";
     private AlertDialog.Builder dialog;
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +40,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
         conteudoEditar = (EditText) findViewById(R.id.conteudoEditarId);
         btSalvarEditar = (Button) findViewById(R.id.btSalvarEdicaoId);
 
-        realm = Realm.getDefaultInstance();
-
-        editarPresenter = new EditPresenterImpl(this,realm);
+        editarPresenter = new EditPresenterImpl(this, StudyListwhitRealm.getInstance().getListaDaoImpl());
         editarPresenter.buscarItem(idReduperado);
 
         btSalvarEditar.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +95,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     }
 
     @Override
-    public void updateTela(ArrayList<Lista> listaResultado) {
+    public void updateTela(List<Lista> listaResultado) {
         String materia="";
         for(int i =0 ; i< listaResultado.size(); i++){
             materia = listaResultado.get(i).getItem();

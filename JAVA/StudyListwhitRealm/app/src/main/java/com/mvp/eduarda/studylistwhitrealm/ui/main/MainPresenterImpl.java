@@ -18,14 +18,14 @@ import io.realm.Realm;
 public class MainPresenterImpl implements IMain.MainPresenter{
     private IMain.MainView mainView;
     private ListaDaoImpl listaDao;
-    private List<Lista> resultado = new ArrayList<Lista>();
+    private List<Lista> resultado ;
     private boolean estadoFlag;
     private Preferences preferences;
 
-    public MainPresenterImpl(IMain.MainView mainView,Context context, Realm realm) {
+    public MainPresenterImpl(IMain.MainView mainView,Preferences preferences, ListaDaoImpl listaDaoImpl) {
         this.mainView = mainView;
-        this.listaDao = new ListaDaoImpl(realm);
-        this.preferences = new Preferences(context);
+        this.listaDao = listaDaoImpl;
+        this.preferences = preferences;
     }
 
     @Override

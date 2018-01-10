@@ -1,14 +1,8 @@
 package com.mvp.eduarda.studylistwhitrealm.ui.edit;
 
-import android.content.Context;
-
 import com.mvp.eduarda.studylistwhitrealm.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
-import com.mvp.eduarda.studylistwhitrealm.ui.main.IMain;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import io.realm.Realm;
 
 /**
@@ -20,9 +14,9 @@ public class EditPresenterImpl implements IEdit.EditarPresenter {
     private ListaDaoImpl listaDao;
     private List<Lista> resultado;
 
-    public EditPresenterImpl(IEdit.EditarView editarView, Realm realm) {
+    public EditPresenterImpl(IEdit.EditarView editarView, ListaDaoImpl listaDaoImpl) {
         this.editarView = editarView;
-        this.listaDao = new ListaDaoImpl(realm);
+        this.listaDao = listaDaoImpl;
     }
 
     @Override

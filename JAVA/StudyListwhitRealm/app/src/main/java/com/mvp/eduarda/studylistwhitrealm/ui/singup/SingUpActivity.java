@@ -16,7 +16,6 @@ public class SingUpActivity extends AppCompatActivity {
     private EditText descricao;
     private Button btSalvarCadastro;
     private SingUpPresenterImpl cadastrarPresenter;
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +27,7 @@ public class SingUpActivity extends AppCompatActivity {
         descricao = (EditText) findViewById(R.id.conteudoId);
         btSalvarCadastro = (Button) findViewById(R.id.btSalvarCadastroId);
 
-        realm = Realm.getDefaultInstance();
-
-        cadastrarPresenter = new SingUpPresenterImpl(realm);
+        cadastrarPresenter = new SingUpPresenterImpl(StudyListwhitRealm.getInstance().getListaDaoImpl());
 
         btSalvarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
