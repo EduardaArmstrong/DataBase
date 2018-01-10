@@ -13,13 +13,13 @@ public class Lista extends RealmObject {
 
     @Required
     @PrimaryKey
-    private long id;
+    private int id;
     private String item;
 
     public Lista() {
     }
 
-    public Lista(long id, String item) {
+    public Lista(int id, String item) {
         this.id = id;
         this.item = item;
     }
@@ -28,7 +28,7 @@ public class Lista extends RealmObject {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,16 +40,5 @@ public class Lista extends RealmObject {
         this.item = item;
     }
 
-
-    public static Long autoIncrementId(){
-        Long id = 1L;
-        Realm realm = Realm.getDefaultInstance();
-        try {
-            id = realm.where(Lista.class).max("id").longValue() + 1;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return id;
-    }
 
 }

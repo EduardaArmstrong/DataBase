@@ -1,10 +1,7 @@
 package com.mvp.eduarda.studylistwhitrealm.data.db;
 
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import io.realm.Realm;
 
 
@@ -14,34 +11,67 @@ import io.realm.Realm;
 
 public class ListaDaoImpl {
     private Realm realm;
-    List<Lista> resultado = new ArrayList<Lista>();
+
 
     public ListaDaoImpl(Realm realm) {
         this.realm = realm;
     }
 
     public List<Lista> listarItens() {
-        resultado = realm.where(Lista.class).findAll();
+
+        realm.beginTransaction();
+            List<Lista> resultado ;
+            resultado = realm.where(Lista.class).findAll();
+        realm.commitTransaction();
+
         return resultado;
     }
 
-    public ArrayList<Lista> buscarItemLista(int id) {
+    public List<Lista> buscarItemLista(int id) {
 
-        return null;
+        realm.beginTransaction();
+            List<Lista> result ;
+            result = realm.where(Lista.class).equalTo("Lista.id", id).findAll();
+        realm.commitTransaction();
+
+        return result;
     }
 
-    public long salvarItemLista( String item){
+    public void salvarItemLista( String item){
 
-        return 0;
+        realm.beginTransaction();
+            int idSoma = autoIncrementId();
+            Lista lista = realm.createObject(Lista.class);
+                lista.setId(idSoma);
+                lista.setItem(item);
+            realm.insert(lista);
+        realm.commitTransaction();
+
     }
 
-    public long editarItemLista(int id , String item){
+    public void editarItemLista(int id , String item){
 
-        return 0;
+        realm.beginTransaction();
+            Lista lista = realm.createObject(Lista.class);
+                lista.setItem(item);
+            realm.copyToRealmOrUpdate(lista);
+        realm.commitTransaction();
     }
 
-    public long deletarItemLista(int id ){
+    public void deletarItemLista(int id ){
+        realm.beginTransaction();
+             realm.where(Lista.class).findAll().deleteFromRealm(id);
+        realm.commitTransaction();
+    }
 
-        return 0;
+    public static int autoIncrementId(){
+        int id = 0;
+        Realm realm = Realm.getDefaultInstance();
+        try {
+            id = realm.where(Lista.class).max("id").intValue() + 1;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

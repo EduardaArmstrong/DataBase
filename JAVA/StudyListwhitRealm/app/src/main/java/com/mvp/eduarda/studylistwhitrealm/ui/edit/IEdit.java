@@ -3,6 +3,7 @@ package com.mvp.eduarda.studylistwhitrealm.ui.edit;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.RealmResults;
 
@@ -13,7 +14,7 @@ import io.realm.RealmResults;
 public interface IEdit {
 
     interface EditarView{
-        void updateTela(ArrayList<Lista> listaResultado);
+        void updateTela(List<Lista> listaResultado);
     }
 
     interface  EditarPresenter{
