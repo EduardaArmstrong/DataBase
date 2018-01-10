@@ -18,7 +18,7 @@ import io.realm.Realm;
 public class MainPresenterImpl implements IMain.MainPresenter{
     private IMain.MainView mainView;
     private ListaDaoImpl listaDao;
-    private List<Lista> resultado ;
+    private List<Lista> resultado = new ArrayList<Lista>();
     private boolean estadoFlag;
     private Preferences preferences;
 

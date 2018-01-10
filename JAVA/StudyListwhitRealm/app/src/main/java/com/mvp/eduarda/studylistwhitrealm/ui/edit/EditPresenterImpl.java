@@ -2,6 +2,8 @@ package com.mvp.eduarda.studylistwhitrealm.ui.edit;
 
 import com.mvp.eduarda.studylistwhitrealm.data.db.ListaDaoImpl;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
+
+import java.util.ArrayList;
 import java.util.List;
 import io.realm.Realm;
 
@@ -12,7 +14,7 @@ import io.realm.Realm;
 public class EditPresenterImpl implements IEdit.EditarPresenter {
     private IEdit.EditarView editarView;
     private ListaDaoImpl listaDao;
-    private List<Lista> resultado;
+    private List<Lista> resultado = new ArrayList<Lista>();
 
     public EditPresenterImpl(IEdit.EditarView editarView, ListaDaoImpl listaDaoImpl) {
         this.editarView = editarView;

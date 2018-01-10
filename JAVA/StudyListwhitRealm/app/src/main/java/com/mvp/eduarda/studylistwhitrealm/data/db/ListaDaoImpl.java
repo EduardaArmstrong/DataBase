@@ -1,6 +1,8 @@
 package com.mvp.eduarda.studylistwhitrealm.data.db;
 
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
+
+import java.util.ArrayList;
 import java.util.List;
 import io.realm.Realm;
 
@@ -17,7 +19,7 @@ public class ListaDaoImpl {
 
     public List<Lista> listarItens() {
 
-        List<Lista> resultado ;
+        List<Lista> resultado = new ArrayList<Lista>();
         resultado = realm.where(Lista.class).findAll();
 
         return resultado;
@@ -25,7 +27,7 @@ public class ListaDaoImpl {
 
     public List<Lista> buscarItemLista(int id) {
 
-        List<Lista> result ;
+        List<Lista> result = new ArrayList<Lista>() ;
         result = realm.where(Lista.class).equalTo("id", id).findAll();
 
         return result;
@@ -51,7 +53,7 @@ public class ListaDaoImpl {
 
     public void deletarItemLista(int id ){
         realm.beginTransaction();
-             realm.where(Lista.class).findAll().deleteFromRealm(id);
+             realm.where(Lista.class).equalTo("id",id).findAll();
         realm.commitTransaction();
     }
 
