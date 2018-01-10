@@ -5,6 +5,8 @@ import android.content.Context;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 import com.mvp.eduarda.studylistwhitrealm.data.db.ListaDaoImpl;
 
+import io.realm.Realm;
+
 /**
  * Created by Eduarda on 26/12/2017.
  */
@@ -12,8 +14,8 @@ import com.mvp.eduarda.studylistwhitrealm.data.db.ListaDaoImpl;
 public class SingUpPresenterImpl implements ISingUp.CadastrarPresenter {
     private ListaDaoImpl listaDao;
 
-    public SingUpPresenterImpl(Context context) {
-        this.listaDao = new ListaDaoImpl(context);
+    public SingUpPresenterImpl(Realm realm) {
+        this.listaDao = new ListaDaoImpl(realm);
     }
 
     @Override

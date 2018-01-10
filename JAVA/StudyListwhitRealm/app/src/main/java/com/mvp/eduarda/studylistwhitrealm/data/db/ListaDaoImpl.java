@@ -14,14 +14,15 @@ import io.realm.Realm;
 
 public class ListaDaoImpl {
     private Realm realm;
+    List<Lista> resultado = new ArrayList<Lista>();
 
     public ListaDaoImpl(Realm realm) {
         this.realm = realm;
     }
 
     public List<Lista> listarItens() {
-
-        return null;
+        resultado = realm.where(Lista.class).findAll();
+        return resultado;
     }
 
     public ArrayList<Lista> buscarItemLista(int id) {

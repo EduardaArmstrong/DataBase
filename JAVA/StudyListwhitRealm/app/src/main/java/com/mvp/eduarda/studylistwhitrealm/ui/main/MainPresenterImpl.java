@@ -9,6 +9,8 @@ import com.mvp.eduarda.studylistwhitrealm.data.prefs.Preferences;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 /**
  * Created by Eduarda on 26/12/2017.
  */
@@ -20,9 +22,9 @@ public class MainPresenterImpl implements IMain.MainPresenter{
     private boolean estadoFlag;
     private Preferences preferences;
 
-    public MainPresenterImpl(IMain.MainView mainView, Context context) {
+    public MainPresenterImpl(IMain.MainView mainView,Context context, Realm realm) {
         this.mainView = mainView;
-        this.listaDao = new ListaDaoImpl(context);
+        this.listaDao = new ListaDaoImpl(realm);
         this.preferences = new Preferences(context);
     }
 

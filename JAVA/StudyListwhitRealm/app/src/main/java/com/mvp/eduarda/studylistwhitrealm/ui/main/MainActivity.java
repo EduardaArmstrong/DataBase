@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
     private MainPresenterImpl mainPresenter;
     private ListItemAdapter adapter;
     private AlertDialog.Builder dialog;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ListItemAdapter(new ArrayList<Lista>());
 
-        mainPresenter = new MainPresenterImpl(this, StudyListwhitRealm.getInstance());
+        realm = Realm.getDefaultInstance();
+
+        mainPresenter = new MainPresenterImpl(this, StudyListwhitRealm.getInstance(), realm);
         mainPresenter.verificarFlag("flag");
         mainPresenter.buscarLista();
 

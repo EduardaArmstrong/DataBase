@@ -8,6 +8,8 @@ import com.mvp.eduarda.studylistwhitrealm.ui.main.IMain;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 /**
  * Created by Eduarda on 26/12/2017.
  */
@@ -17,9 +19,9 @@ public class EditPresenterImpl implements IEdit.EditarPresenter {
     private ListaDaoImpl listaDao;
     private ArrayList<Lista> resultado;
 
-    public EditPresenterImpl(IEdit.EditarView editarView, Context context) {
+    public EditPresenterImpl(IEdit.EditarView editarView, Realm realm) {
         this.editarView = editarView;
-        this.listaDao = new ListaDaoImpl(context);
+        this.listaDao = new ListaDaoImpl(realm);
     }
 
     @Override

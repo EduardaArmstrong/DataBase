@@ -16,6 +16,8 @@ import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     private EditText conteudoEditar;
     private Button btSalvarEditar;
@@ -23,6 +25,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     private EditPresenterImpl editarPresenter;
     private String textoConteudoEditar ="";
     private AlertDialog.Builder dialog;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,9 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
         conteudoEditar = (EditText) findViewById(R.id.conteudoEditarId);
         btSalvarEditar = (Button) findViewById(R.id.btSalvarEdicaoId);
 
-        editarPresenter = new EditPresenterImpl(this, StudyListwhitRealm.getInstance());
+        realm = Realm.getDefaultInstance();
+
+        editarPresenter = new EditPresenterImpl(this,realm);
         editarPresenter.buscarItem(idReduperado);
 
         btSalvarEditar.setOnClickListener(new View.OnClickListener() {

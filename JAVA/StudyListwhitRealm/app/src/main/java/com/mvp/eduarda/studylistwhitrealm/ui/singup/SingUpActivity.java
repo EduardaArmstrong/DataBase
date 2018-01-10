@@ -10,10 +10,13 @@ import android.widget.Toast;
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 
+import io.realm.Realm;
+
 public class SingUpActivity extends AppCompatActivity {
     private EditText descricao;
     private Button btSalvarCadastro;
     private SingUpPresenterImpl cadastrarPresenter;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class SingUpActivity extends AppCompatActivity {
         descricao = (EditText) findViewById(R.id.conteudoId);
         btSalvarCadastro = (Button) findViewById(R.id.btSalvarCadastroId);
 
-        cadastrarPresenter = new SingUpPresenterImpl(StudyListwhitRealm.getInstance());
+        realm = Realm.getDefaultInstance();
+
+        cadastrarPresenter = new SingUpPresenterImpl(realm);
 
         btSalvarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
