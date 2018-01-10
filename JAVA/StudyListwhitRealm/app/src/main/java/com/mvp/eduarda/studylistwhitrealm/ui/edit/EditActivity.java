@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -81,6 +83,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            List<Lista> lista = new ArrayList<Lista>();
                             editarPresenter.salvarAlteracao(idReduperado,textoConteudoEditar);
                             finish();
                         }

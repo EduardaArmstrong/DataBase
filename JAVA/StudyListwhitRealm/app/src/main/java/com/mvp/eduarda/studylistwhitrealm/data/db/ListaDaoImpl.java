@@ -5,6 +5,7 @@ import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 import java.util.ArrayList;
 import java.util.List;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Eduarda on 27/12/2017.
@@ -19,7 +20,7 @@ public class ListaDaoImpl {
 
     public List<Lista> listarItens() {
 
-        List<Lista> resultado = new ArrayList<Lista>();
+        List<Lista> resultado;
         resultado = realm.where(Lista.class).findAll();
 
         return resultado;
@@ -27,7 +28,7 @@ public class ListaDaoImpl {
 
     public List<Lista> buscarItemLista(int id) {
 
-        List<Lista> result = new ArrayList<Lista>() ;
+        List<Lista> result ;
         result = realm.where(Lista.class).equalTo("id", id).findAll();
 
         return result;
@@ -37,23 +38,22 @@ public class ListaDaoImpl {
 
         realm.beginTransaction();
             Lista lista = realm.createObject(Lista.class,String.valueOf(autoIncrementId()));
-                lista.setItem(item);
+                lista.setItem(item.toString());
         realm.commitTransaction();
 
     }
 
-    public void editarItemLista(int id , String item){
+    public void editarItemLista(Lista lista){
 
         realm.beginTransaction();
-            Lista lista = realm.createObject(Lista.class,String.valueOf(id));
-                lista.setItem(item);
             realm.copyToRealmOrUpdate(lista);
         realm.commitTransaction();
     }
 
     public void deletarItemLista(int id ){
         realm.beginTransaction();
-             realm.where(Lista.class).equalTo("id",id).findAll();
+            RealmResults<Lista> result = realm.where(Lista.class).equalTo("id",id).findAll();
+            result.deleteAllFromRealm();
         realm.commitTransaction();
     }
 

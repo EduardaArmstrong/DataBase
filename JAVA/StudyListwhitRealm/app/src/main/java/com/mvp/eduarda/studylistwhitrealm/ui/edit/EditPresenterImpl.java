@@ -14,7 +14,7 @@ import io.realm.Realm;
 public class EditPresenterImpl implements IEdit.EditarPresenter {
     private IEdit.EditarView editarView;
     private ListaDaoImpl listaDao;
-    private List<Lista> resultado = new ArrayList<Lista>();
+    private List<Lista> resultado;
 
     public EditPresenterImpl(IEdit.EditarView editarView, ListaDaoImpl listaDaoImpl) {
         this.editarView = editarView;
@@ -30,7 +30,10 @@ public class EditPresenterImpl implements IEdit.EditarPresenter {
 
     @Override
     public void salvarAlteracao(int id, String descricao) {
-        listaDao.editarItemLista(id,descricao);
+      Lista list = new Lista();
+        list.setId(id);
+        list.setItem(descricao);
 
+        listaDao.editarItemLista(list);
     }
 }

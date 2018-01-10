@@ -136,4 +136,5 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
     public void toastBemVindo() {
         Toast.makeText(MainActivity.this, " Bem Vindo ", Toast.LENGTH_LONG).show();
     }
+
 }
