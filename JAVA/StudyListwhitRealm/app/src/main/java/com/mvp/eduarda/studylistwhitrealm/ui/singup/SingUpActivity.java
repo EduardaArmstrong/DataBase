@@ -6,42 +6,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 
-import io.realm.Realm;
-
 public class SingUpActivity extends AppCompatActivity {
-    private EditText descricao;
-    private Button btSalvarCadastro;
-    private SingUpPresenterImpl cadastrarPresenter;
+    private EditText description;
+    private Button saveButton;
+    private SingUpPresenterImpl singUpPresenterImpl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
 
+        //title
         setTitle("Cadastrar novo conteudo");
 
-        descricao = (EditText) findViewById(R.id.conteudoId);
-        btSalvarCadastro = (Button) findViewById(R.id.btSalvarCadastroId);
+        description = (EditText) findViewById(R.id.conteudoId);
+        saveButton = (Button) findViewById(R.id.btSalvarCadastroId);
 
-        cadastrarPresenter = new SingUpPresenterImpl(StudyListwhitRealm.getInstance().getListaDaoImpl());
+        singUpPresenterImpl = new SingUpPresenterImpl(StudyListwhitRealm.getInstance().getListaDaoImpl());
 
-        btSalvarCadastro.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textoDescricao = descricao.getText().toString();
-                if(textoDescricao.isEmpty()){
+                String descriptionText = description.getText().toString();
+                if(descriptionText.isEmpty()){
                     Toast.makeText(SingUpActivity.this, "Digite um conteudo", Toast.LENGTH_SHORT).show();
                 }else{
-                    cadastrarPresenter.salvarItem(textoDescricao);
+                    singUpPresenterImpl.saveItem(descriptionText);
                     finish();
                 }
             }
         });
     }
-
-
 }

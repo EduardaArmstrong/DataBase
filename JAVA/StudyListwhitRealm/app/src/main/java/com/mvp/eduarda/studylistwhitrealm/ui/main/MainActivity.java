@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
@@ -18,19 +17,13 @@ import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
 import com.mvp.eduarda.studylistwhitrealm.ui.edit.EditActivity;
 import com.mvp.eduarda.studylistwhitrealm.ui.main.adapter.ListItemAdapter;
 import com.mvp.eduarda.studylistwhitrealm.ui.singup.SingUpActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
-
-import static io.realm.Realm.init;
-
 public class MainActivity extends AppCompatActivity implements IMain.MainView{
     RecyclerView  recyclerView;
-    private ImageButton btCadastrar;
-    private MainPresenterImpl mainPresenter;
+    private ImageButton registerButton;
+    private MainPresenterImpl mainPresenterImpl;
     private ListItemAdapter adapter;
     private AlertDialog.Builder dialog;
 
@@ -39,23 +32,23 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btCadastrar = (ImageButton) findViewById(R.id.btCadastrarId);
+        registerButton = (ImageButton) findViewById(R.id.btCadastrarId);
         recyclerView = (RecyclerView) findViewById(R.id.listaStudoId);
 
-        //recuperar componentes
+        //recover components
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ListItemAdapter(new ArrayList<Lista>());
 
-        mainPresenter = new MainPresenterImpl(this, StudyListwhitRealm.getInstance().getPreferences(), StudyListwhitRealm.getInstance().getListaDaoImpl());
-        mainPresenter.verificarFlag("flag");
-        mainPresenter.buscarLista();
+        mainPresenterImpl = new MainPresenterImpl(this, StudyListwhitRealm.getInstance().getPreferences(), StudyListwhitRealm.getInstance().getListaDaoImpl());
+        mainPresenterImpl.checkFlag("flag");
+        mainPresenterImpl.findList();
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 view.getId();
-                Lista lista =(Lista) adapter.getData().get(position);
-                final int idItem = lista.getId();
+                Lista obj =(Lista) adapter.getData().get(position);
+                final int idItem = obj.getId();
 
                 switch (view.getId()){
 
@@ -69,23 +62,22 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
 
                     case R.id.deletar:
 
-                        //criar o alert dialog
+                        //create an alert dialog
                         dialog = new AlertDialog.Builder(MainActivity.this);
 
-                        //configurar o título
+                        //title
                         dialog.setTitle("Excluir Conteudo");
 
-                        //configurar a mensagem
+                        //message configuration
                         dialog.setMessage("Tem certeza que deseja excluir esse conteudo ?");
 
-                        //não permite cancelar a dialog se clicar fora
+                        //do not allow canceling the message when clicking away
                         dialog.setCancelable(false);
 
-                        //definir um icone
+                        //icone
                         dialog.setIcon(android.R.drawable.ic_dialog_info);
 
-                        //configurar os botoes
-                        //botao não
+                        //no button
                         dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -93,11 +85,11 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
                             }
                         });
 
-                        //botao sim
+                        //yes button
                         dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mainPresenter.excluirItem(idItem);
+                                mainPresenterImpl.deleteItem(idItem);
                                 onResume();
                             }
                         });
@@ -109,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
             }
         });
 
-        //botao +
-        btCadastrar.setOnClickListener(new View.OnClickListener() {
+        // + button
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this , SingUpActivity.class));
@@ -121,20 +113,20 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
     @Override
     protected void onResume() {
         super.onResume();
-        mainPresenter.buscarLista();
+        mainPresenterImpl.findList();
     }
 
     @Override
-    public void updateLista(List<Lista> listaresultado) {
-        if(!listaresultado.isEmpty()){
-            adapter.setNewData(listaresultado);
+    public void updateList(List<Lista> resultList) {
+        if(!resultList.isEmpty()){
+            adapter.setNewData(resultList);
         }
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void toastBemVindo() {
-        Toast.makeText(MainActivity.this, " Bem Vindo ", Toast.LENGTH_LONG).show();
+    public void toastWelcome() {
+        Toast.makeText(MainActivity.this, " Bem Vindo Realm", Toast.LENGTH_LONG).show();
     }
 
 }

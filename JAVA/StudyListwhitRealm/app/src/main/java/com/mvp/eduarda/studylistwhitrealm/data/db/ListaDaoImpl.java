@@ -18,40 +18,40 @@ public class ListaDaoImpl {
         this.realm = realm;
     }
 
-    public List<Lista> listarItens() {
+    public List<Lista> findAllItems() {
 
-        List<Lista> resultado = realm.where(Lista.class).findAll();
+        List<Lista> result = realm.where(Lista.class).findAll();
 
-        return resultado;
+        return result;
     }
 
-    public List<Lista> buscarItemLista(int id) {
+    public List<Lista> findItem(int id) {
 
         List<Lista> result = realm.where(Lista.class).equalTo("id", id).findAll();
 
         return result;
     }
 
-    public void salvarItemLista( String item){
+    public void saveItem( String item){
 
         realm.beginTransaction();
-            Lista lista = new Lista();
-                lista.setId(autoIncrementId());
-                lista.setItem(item);
+            Lista obj = new Lista();
+                obj.setId(autoIncrementId());
+                obj.setItem(item);
 
-                realm.insert(lista);
+                realm.insert(obj);
         realm.commitTransaction();
 
     }
 
-    public void editarItemLista(Lista lista){
+    public void editItem(Lista list){
 
         realm.beginTransaction();
-            realm.copyToRealmOrUpdate(lista);
+            realm.copyToRealmOrUpdate(list);
         realm.commitTransaction();
     }
 
-    public void deletarItemLista(int id ){
+    public void deleteItem(int id ){
         realm.beginTransaction();
             RealmResults<Lista> result = realm.where(Lista.class).equalTo("id",id).findAll();
             result.deleteAllFromRealm();
@@ -59,19 +59,19 @@ public class ListaDaoImpl {
     }
 
     public int autoIncrementId(){
-        Number idFinal;
-        int idNovo = 0;
+        Number finalId;
+        int nextId = 0;
         try {
-            idFinal = realm.where(Lista.class).max("id");
+            finalId = realm.where(Lista.class).max("id");
 
-            if(idFinal == null){
-                idNovo = 0;
+            if(finalId == null){
+                nextId = 0;
             }else{
-                idNovo = idFinal.intValue() + 1;
+                nextId = finalId.intValue() + 1;
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return idNovo;
+        return nextId;
     }
 }

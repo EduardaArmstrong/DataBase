@@ -1,12 +1,10 @@
 package com.mvp.eduarda.studylistwhitrealm.ui.main.adapter;
 
 import android.support.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
-
 import java.util.List;
 
 /**

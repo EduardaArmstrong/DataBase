@@ -12,65 +12,61 @@ import android.widget.Toast;
 import com.mvp.eduarda.studylistwhitrealm.R;
 import com.mvp.eduarda.studylistwhitrealm.app.StudyListwhitRealm;
 import com.mvp.eduarda.studylistwhitrealm.data.domain.Lista;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
 
 public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
-    private EditText conteudoEditar;
-    private Button btSalvarEditar;
-    private int idReduperado;
-    private EditPresenterImpl editarPresenter;
-    private String textoConteudoEditar ="";
+    private EditText editContent;
+    private Button saveEditButton;
+    private int recoverId;
+    private EditPresenterImpl editPresenterImpl;
+    private String editContentText ="";
     private AlertDialog.Builder dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        //Mostra flecha voltar na action bar
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Titulo
+        //Title
         setTitle("Editar Conteudo da Lista");
 
-        //recupera o id
-        idReduperado = getIntent().getIntExtra("id",0);
+        //recover id
+        recoverId = getIntent().getIntExtra("id",0);
 
-        conteudoEditar = (EditText) findViewById(R.id.conteudoEditarId);
-        btSalvarEditar = (Button) findViewById(R.id.btSalvarEdicaoId);
+        editContent = (EditText) findViewById(R.id.conteudoEditarId);
+        saveEditButton = (Button) findViewById(R.id.btSalvarEdicaoId);
 
-        editarPresenter = new EditPresenterImpl(this, StudyListwhitRealm.getInstance().getListaDaoImpl());
-        editarPresenter.buscarItem(idReduperado);
+        editPresenterImpl = new EditPresenterImpl(this, StudyListwhitRealm.getInstance().getListaDaoImpl());
+        editPresenterImpl.findItem(recoverId);
 
-        btSalvarEditar.setOnClickListener(new View.OnClickListener() {
+        saveEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textoConteudoEditar = conteudoEditar.getText().toString();
+                editContentText = editContent.getText().toString();
 
-                if(textoConteudoEditar.isEmpty()){
+                if(editContentText.isEmpty()){
                     Toast.makeText(EditActivity.this,"Digite o conteudo a ser alterado", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    //criar o alert dialog
+                    //create an alert dialog
                     dialog = new AlertDialog.Builder(EditActivity.this);
 
-                    //configurar o título
+                    //title
                     dialog.setTitle("Editar Conteudo");
 
-                    //configurar a mensagem
+                    //message configuration
                     dialog.setMessage("Tem certeza que deseja editar o conteudo ?");
 
-                    //não permite cancelar a dialog se clicar fora
+                    //do not allow canceling the message when clicking away
                     dialog.setCancelable(false);
 
-                    //definir um icone
+                    //icone
                     dialog.setIcon(android.R.drawable.ic_dialog_info);
 
-                    //configurar os botoes
-                    //botao não
+                    //no button
                     dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -78,13 +74,12 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
                         }
                     });
 
-                    //botao sim
+                    //yes button
                     dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            List<Lista> lista = new ArrayList<Lista>();
-                            editarPresenter.salvarAlteracao(idReduperado,textoConteudoEditar);
+                            editPresenterImpl.editItem(recoverId,editContentText);
                             finish();
                         }
                     });
@@ -98,12 +93,12 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
     }
 
     @Override
-    public void updateTela(List<Lista> listaResultado) {
-        String materia="";
-        for(int i =0 ; i< listaResultado.size(); i++){
-            materia = listaResultado.get(i).getItem();
+    public void updateScreen(List<Lista> listResult) {
+        String subject="";
+        for(int i =0 ; i< listResult.size(); i++){
+            subject = listResult.get(i).getItem();
         }
-        conteudoEditar.setText(materia);
+        editContent.setText(subject);
     }
 
     @Override

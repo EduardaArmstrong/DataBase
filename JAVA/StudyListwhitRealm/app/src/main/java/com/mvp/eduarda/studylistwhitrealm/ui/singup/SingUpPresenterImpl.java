@@ -14,7 +14,7 @@ public class SingUpPresenterImpl implements ISingUp.CadastrarPresenter {
     }
 
     @Override
-    public void salvarItem(String descricao) {
-        listaDao.salvarItemLista(descricao);
+    public void saveItem(String item) {
+        listaDao.saveItem(item);
     }
 }

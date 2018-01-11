@@ -11,28 +11,25 @@ public class Preferences {
 
     private SharedPreferences sharedPreferences;
     private static final String ARQUIVO_FLAG = "arquivoFlag";
-    private String estado;
+    private String status;
 
     public Preferences(Context context) {
         sharedPreferences = context.getSharedPreferences(ARQUIVO_FLAG, context.MODE_PRIVATE);
     }
 
-    public void salvarFlag(String key, String valor){
-
+    public void saveFlag(String key, String value){
         sharedPreferences.edit()
-                .putString(key,valor)
+                .putString(key,value)
                 .commit();
-
     }
 
-    public boolean buscarFlag(String key){
-        estado = sharedPreferences.getString(key,"");
+    public boolean findFlag(String key){
+        status = sharedPreferences.getString(key,"");
 
-        if(estado.isEmpty() || estado == null){
+        if(status.isEmpty() || status == null){
             return false;
         }else {
             return true;
         }
     }
-
 }
