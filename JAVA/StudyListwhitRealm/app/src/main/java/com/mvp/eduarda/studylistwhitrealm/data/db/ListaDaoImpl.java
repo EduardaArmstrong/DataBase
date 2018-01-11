@@ -20,16 +20,14 @@ public class ListaDaoImpl {
 
     public List<Lista> listarItens() {
 
-        List<Lista> resultado;
-        resultado = realm.where(Lista.class).findAll();
+        List<Lista> resultado = realm.where(Lista.class).findAll();
 
         return resultado;
     }
 
     public List<Lista> buscarItemLista(int id) {
 
-        List<Lista> result ;
-        result = realm.where(Lista.class).equalTo("id", id).findAll();
+        List<Lista> result = realm.where(Lista.class).equalTo("id", id).findAll();
 
         return result;
     }
@@ -37,8 +35,11 @@ public class ListaDaoImpl {
     public void salvarItemLista( String item){
 
         realm.beginTransaction();
-            Lista lista = realm.createObject(Lista.class,String.valueOf(autoIncrementId()));
-                lista.setItem(item.toString());
+            Lista lista = new Lista();
+                lista.setId(autoIncrementId());
+                lista.setItem(item);
+
+                realm.insert(lista);
         realm.commitTransaction();
 
     }
