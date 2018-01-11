@@ -22,10 +22,10 @@ public class MainPresenterImpl implements IMain.MainPresenter {
     private boolean estadoFlag;
     private Preferences preferences;
 
-    public MainPresenterImpl(IMain.MainView mainView, Context context) {
+    public MainPresenterImpl(IMain.MainView mainView, Preferences preferences, ListaDaoImpl listaDaoImpl) {
         this.mainView = mainView;
-        this.listaDao = new ListaDaoImpl(context);
-        this.preferences = new Preferences(context);
+        this.listaDao = listaDaoImpl;
+        this.preferences = preferences;
     }
 
     @Override

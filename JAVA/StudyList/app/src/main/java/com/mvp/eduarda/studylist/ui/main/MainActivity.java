@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMain.MainView{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ListItemAdapter(new ArrayList<Lista>());
 
-        mainPresenter = new MainPresenterImpl(this, StudyList.getInstance());
+        mainPresenter = new MainPresenterImpl(this, StudyList.getInstance().getPreferences(),StudyList.getInstance().getListaDaoImpl());
         mainPresenter.verificarFlag("flag");
         mainPresenter.buscarLista();
 

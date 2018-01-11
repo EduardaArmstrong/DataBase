@@ -27,7 +27,7 @@ public class SingUpActivity extends AppCompatActivity {
         descricao = (EditText) findViewById(R.id.conteudoId);
         btSalvarCadastro = (Button) findViewById(R.id.btSalvarCadastroId);
 
-        cadastrarPresenter = new SingUpPresenterImpl(StudyList.getInstance());
+        cadastrarPresenter = new SingUpPresenterImpl(StudyList.getInstance().getListaDaoImpl());
 
         btSalvarCadastro.setOnClickListener(new View.OnClickListener() {
             @Override

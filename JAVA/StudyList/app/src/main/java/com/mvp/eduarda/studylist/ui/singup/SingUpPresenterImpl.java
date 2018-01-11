@@ -12,8 +12,8 @@ import com.mvp.eduarda.studylist.data.db.ListaDaoImpl;
 public class SingUpPresenterImpl implements ISingUp.CadastrarPresenter {
     private ListaDaoImpl listaDao;
 
-    public SingUpPresenterImpl(Context context) {
-        this.listaDao = new ListaDaoImpl(context);
+    public SingUpPresenterImpl(ListaDaoImpl listaDaoImpl) {
+        this.listaDao = listaDaoImpl;
     }
 
     @Override

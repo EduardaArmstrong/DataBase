@@ -41,7 +41,7 @@ public class EditActivity extends AppCompatActivity implements IEdit.EditarView{
         conteudoEditar = (EditText) findViewById(R.id.conteudoEditarId);
         btSalvarEditar = (Button) findViewById(R.id.btSalvarEdicaoId);
 
-        editarPresenter = new EditPresenterImpl(this, StudyList.getInstance());
+        editarPresenter = new EditPresenterImpl(this, StudyList.getInstance().getListaDaoImpl());
         editarPresenter.buscarItem(idReduperado);
 
         btSalvarEditar.setOnClickListener(new View.OnClickListener() {

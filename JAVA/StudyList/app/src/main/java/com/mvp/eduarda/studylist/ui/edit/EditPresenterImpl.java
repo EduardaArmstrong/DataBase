@@ -14,9 +14,9 @@ public class EditPresenterImpl implements IEdit.EditarPresenter {
     private ListaDaoImpl listaDao;
     private ArrayList<Lista> resultado;
 
-    public EditPresenterImpl(IEdit.EditarView editarView, Context context) {
+    public EditPresenterImpl(IEdit.EditarView editarView, ListaDaoImpl listaDaoImpl) {
         this.editarView = editarView;
-        this.listaDao = new ListaDaoImpl(context);
+        this.listaDao = listaDaoImpl;
     }
 
     @Override
