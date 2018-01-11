@@ -35,7 +35,7 @@ public class Lista extends RealmObject {
         return item;
     }
 
-    public void setItem(String detalhes) {
+    public void setItem(String item) {
         this.item = item;
     }
 
